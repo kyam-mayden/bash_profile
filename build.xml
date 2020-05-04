@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bash_profile" default="sub-in-bashconf">
+    <property file="build.properties" />
+
+    <tstamp>
+        <format property="time.epoch" pattern="%s" />
+    </tstamp>
+
+    <target name="sub-in-bashconf">
+        <if>
+            <available file="bash_profile" type="file" />
+            <then>
+                <delete file="bash_profile" />
+            </then>
+        </if>
+
+        <copy file="bash_profile.example" tofile="bash_profile" />
+        <exec command="cat file1.txt bash_profile.example application_aliases > bash_profile" />
+        <reflexive>
+            <fileset dir=".">
+                <include name="bash_profile" />
+            </fileset>
+            <filterchain>
+                <replacetokens begintoken="##" endtoken="##">
+                    <token key="TEST.PATH" value="${test.path}" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <target name="build" depends="sub-in-bashconf">
+        <mkdir dir="${user.home}/.bash_profile_old" />
+        <chmod file="${user.home}/.bash_profile_old" mode="0700" />
+        <move file="${user.home}/.bash_profile" tofile="${user.home}/.bash_profile_old/bash_profile_${time.epoch}" overwrite="false" />
+        <copy file="bash_profile" tofile="${user.home}/.bash_profile" overwrite="true" />
+        <chmod file="${user.home}/.bash_profile" mode="0600" />
+    </target>
+</project>

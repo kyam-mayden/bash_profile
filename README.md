@@ -1,1 +1,4 @@
-# bash_profile
+# Bash Profile
+
+- Add application related aliases to application_aliases
+- Add file route to testing areas in build.properties

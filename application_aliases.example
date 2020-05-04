@@ -1,0 +1,2 @@
+alias testing='cd ##TEST.PATH##';
+alias sites='cd ~/sites/';

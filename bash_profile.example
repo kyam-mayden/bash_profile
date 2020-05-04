@@ -1,0 +1,57 @@
+export PATH=~/.npm-global/bin:/Users/kyamharris/.composer/vendor/bin:$PATH
+
+## Display
+export PS1="\[\033[36m\]\u@\h\[\033[m\]@\[\033[32m\] \[\033[33;1m\]\w\[\033[31m\] \$(git branch 2>/dev/null | grep '^*' | colrm 1 2) \[\033[1;37m\] \n$ "
+
+## Aliases
+## Better terminal
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+alias c='clear';
+alias ll='ls -FGlAhp';
+cd() { builtin cd "$@"; ll; }
+
+# Local Development
+alias vu='vagrant up';
+alias vs='vagrant ssh';
+
+#colorize grep returns
+alias grep='grep --color=auto';
+alias egrep='egrep --color=auto';
+alias fgrep='fgrep --color=auto';
+
+# Git better
+alias co='git commit';
+alias s='git status';
+alias pu='git pull';
+alias nah="git reset --hard; git clean -df;";
+function plog () {
+    git push
+    git log --pretty=format:'%h' -n 1 | pbcopy
+};
+function p () {
+    output=$(git push "$@" 2>&1)
+    echo "$output" # for user info
+    match=`echo "$output" | grep -c 'The current branch .* has no upstream branch'`
+    if [[ $match -eq 1 ]] ; then
+        echo 'Found no upstream branch warning, trying to create upstream...'
+        `echo $output | grep -oh 'use .*$' | cut -c5-`
+    fi
+
+    return
+}
+
+function cssh() {
+    PROFILE="RedTheme";
+    DEF="Pro"; #the default profile name
+    echo "tell app \"Terminal\" to set current settings of first window to settings set \"${PROFILE}\""|osascript;
+    ssh $1;
+    echo "tell app \"Terminal\" to set current settings of first window to settings set \"${DEF}\""|osascript;
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.cargo/bin:$PATH"

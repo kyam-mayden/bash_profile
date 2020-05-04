@@ -15,7 +15,7 @@
         </if>
 
         <copy file="bash_profile.example" tofile="bash_profile" />
-        <exec command="cat file1.txt bash_profile.example application_aliases > bash_profile" />
+        <exec command="cat bash_profile.example application_aliases > bash_profile" />
         <reflexive>
             <fileset dir=".">
                 <include name="bash_profile" />

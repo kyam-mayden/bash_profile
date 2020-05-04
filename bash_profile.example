@@ -1,13 +1,15 @@
 export PATH=~/.npm-global/bin:/Users/kyamharris/.composer/vendor/bin:$PATH
 
-## Display
+# Display
+# user @ machine - blue
+# current working directory - yellow
+# git branch - red
 export PS1="\[\033[36m\]\u@\h\[\033[m\]@\[\033[32m\] \[\033[33;1m\]\w\[\033[31m\] \$(git branch 2>/dev/null | grep '^*' | colrm 1 2) \[\033[1;37m\] \n$ "
 
-## Aliases
-## Better terminal
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
+# Better terminal
+alias cp='cp -iv';
+alias mv='mv -iv';
+alias mkdir='mkdir -pv';
 alias c='clear';
 alias ll='ls -FGlAhp';
 cd() { builtin cd "$@"; ll; }
@@ -16,7 +18,7 @@ cd() { builtin cd "$@"; ll; }
 alias vu='vagrant up';
 alias vs='vagrant ssh';
 
-#colorize grep returns
+# Colourise grep returns
 alias grep='grep --color=auto';
 alias egrep='egrep --color=auto';
 alias fgrep='fgrep --color=auto';
@@ -26,10 +28,12 @@ alias co='git commit';
 alias s='git status';
 alias pu='git pull';
 alias nah="git reset --hard; git clean -df;";
+
 function plog () {
     git push
     git log --pretty=format:'%h' -n 1 | pbcopy
 };
+
 function p () {
     output=$(git push "$@" 2>&1)
     echo "$output" # for user info
@@ -40,14 +44,6 @@ function p () {
     fi
 
     return
-}
-
-function cssh() {
-    PROFILE="RedTheme";
-    DEF="Pro"; #the default profile name
-    echo "tell app \"Terminal\" to set current settings of first window to settings set \"${PROFILE}\""|osascript;
-    ssh $1;
-    echo "tell app \"Terminal\" to set current settings of first window to settings set \"${DEF}\""|osascript;
 }
 
 export NVM_DIR="$HOME/.nvm"

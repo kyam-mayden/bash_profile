@@ -18,7 +18,7 @@ cd() { builtin cd "$@"; ll; }
 alias vu='vagrant up';
 alias vs='vagrant ssh';
 alias where="grep 'Host ' ~/.ssh/config";
-alias what="grep 'alias' .bash_profile";
+alias what="grep 'alias' ~/.bash_profile";
 
 # Colourise grep returns
 alias grep='grep --color=auto';

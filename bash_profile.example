@@ -17,6 +17,7 @@ cd() { builtin cd "$@"; ll; }
 # Local Development
 alias vu='vagrant up';
 alias vs='vagrant ssh';
+alias where="grep 'Host ' ~/.ssh/config";
 
 # Colourise grep returns
 alias grep='grep --color=auto';

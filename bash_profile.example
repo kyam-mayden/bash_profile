@@ -33,7 +33,7 @@ alias nah="git reset --hard; git clean -df;";
 
 function plog () {
     git push
-    git log --pretty=format:'%h' -n 1 | pbcopy
+    git log --pretty=format:'%H' -n 1 | pbcopy
 };
 
 function p () {

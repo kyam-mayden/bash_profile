@@ -17,8 +17,16 @@ cd() { builtin cd "$@"; ll; }
 # Better Local Development
 alias vu='vagrant up';
 alias vs='vagrant ssh';
-alias where="grep 'Host ' ~/.ssh/config";
 alias what="grep 'alias' ~/.bash_profile";
+
+function where () {
+    if [[ -z "$1" ]]
+            then
+                grep 'Host ' ~/.ssh/config
+            else
+                grep 'Host ' ~/.ssh/config | grep "$1"
+        fi
+}
 
 # Colourise grep returns
 alias grep='grep --color=auto';
@@ -32,8 +40,8 @@ alias pu='git pull';
 alias nah="git reset --hard; git clean -df;";
 
 function plog () {
-    git push
-    git log --pretty=format:'%H' -n 1 | pbcopy
+    ${p}
+    git log --pretty=format:'%h' -n 1 | pbcopy
 };
 
 function p () {

@@ -55,3 +55,18 @@ function p () {
 
     return
 }
+
+function each_dir () {
+    if [ -z "$1" ]
+        then
+            echo "doing nothing beep boop"
+        else
+            for D in *; do
+                if [ -d "${D}" ]; then
+                    eval cd "./${D}" >/dev/null 2>&1 # silence the cd output
+                    eval '$1'
+                    eval cd "../" >/dev/null 2>&1 # silence the cd output
+                fi
+            done
+    fi
+}

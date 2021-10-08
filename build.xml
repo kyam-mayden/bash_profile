@@ -23,6 +23,7 @@
             <filterchain>
                 <replacetokens begintoken="##" endtoken="##">
                     <token key="TEST.PATH" value="${test.path}" />
+                    <token key="SSH.PATH" value="${ssh.path}" />
                 </replacetokens>
             </filterchain>
         </reflexive>

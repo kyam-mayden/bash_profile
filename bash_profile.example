@@ -25,9 +25,9 @@ export NVM_DIR="$HOME/.nvm"
 function where () {
     if [[ -z "$1" ]]
             then
-                grep 'Host ' ~/.ssh/config
+                grep -rh 'Host ' ##SSH.PATH##
             else
-                grep 'Host ' ~/.ssh/config | grep "$1"
+                grep -rh 'Host ' ##SSH.PATH## | grep "$1"
         fi
 }
 

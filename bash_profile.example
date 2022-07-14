@@ -59,6 +59,32 @@ function p () {
     return
 }
 
+# Merge in a fresh version of a remote branch to the branch you are current on
+function smerge () {
+    git pull &>/dev/null
+
+    current_branch=$(git rev-parse --abbrev-ref HEAD 2>&1)
+    printf "Smerging $@ into $current_branch\n"
+
+    printf "Pulling down latest version of '$@'\n"
+
+    output=$(git checkout "$@" 2>&1)
+
+    match=`echo "$output" | grep -c 'error: pathspec'`
+    if [[ $match -eq 1 ]] ; then
+        printf "You gave me a branch that doesnt exist\n"
+        return 1
+    fi
+
+    git pull &>/dev/null
+    git checkout - &>/dev/null
+
+    output=$(git merge --no-ff origin/"$@" 2>&1)
+    printf "$output\n" # for user info
+
+    return
+}
+
 function each_child_do () {
     if [ -z "$1" ]
         then

@@ -13,8 +13,6 @@ alias ll='ls -FGlAhp';
 cd() { builtin cd "$@"; ll; }
 
 # Better Local Development
-alias vu='vagrant up';
-alias vs='vagrant ssh';
 alias what="grep 'alias' ~/.bash_profile";
 alias sail='./vendor/bin/sail'
 
